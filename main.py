@@ -187,7 +187,6 @@ async def precipitation_date(prcp: float):
     return {"nombre_requetes_filtrer_prcp": compteur_filtrer_prcp,
             "nombre_requetes_prcp_specifique": compteur_prcp[prcp], "precipitation_tab": precipitation_tab}
 
-
 @app.get('/delete/{annee}-{mois}-{jour}')
 async def supprimer_date(annee, mois, jour):
     """
@@ -224,6 +223,35 @@ async def supprimer_date(annee, mois, jour):
 
     raise HTTPException(
         status_code=404, detail="la date est introuvable")
+
+@app.get('/update/{annee}-{mois}-{jour}/{args}/{modification}')
+async def update(annee, mois, jour, args, modification):
+    """
+    Met à jour les données météorologiques pour une date spécifique.
+
+    Args:
+        annee (str): L'année de la date à mettre à jour.
+        mois (str): Le mois de la date à mettre à jour.
+        jour (str): Le jour de la date à mettre à jour.
+        args (str): Le champ des données météorologiques à mettre à jour.
+        modification (str ou int): La nouvelle valeur à attribuer au champ spécifié.
+
+    Returns:
+        dict or str: Un dictionnaire contenant les données mises à jour si la date est trouvée,
+                     ou une chaîne de caractères indiquant que la date est introuvable.
+
+    Remarques:
+        - Si 'args' n'est pas égal à 'date', 'modification' doit être un entier.
+        - Le format de la date doit être : 'annee-mois-jour'.
+    """
+    date = f'{annee}-{mois}-{jour}'
+    if args != 'date':
+        modification = int(modification)
+    for data in weather_data:
+        if data['date'] == date:
+            data[args] = modification
+            return data
+    return 'Date introuvable. Veuillez indiquer une date dans le format : annee-mois-jour.'
 
 if __name__ == '__main__':
     import uvicorn
