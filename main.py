@@ -15,11 +15,22 @@ async def afficher_date():
 async def filtrer_date(annee, mois, jour):
     """
     Cette fonction permet d'afficher les données d'une date précise.
+
+    :param annee: L'année de la date à afficher.
+    :param mois: Le mois de la date à afficher.
+    :param jour: Le jour de la date à afficher.
+
+    Les trois arguments doivent être des nombres entiers.
+
+    :return: Les données de la date demandée.
     """
+
     date = (f'{annee}-{mois}-{jour}')
-    for i in weather_data:
-        if i['date'] == date:
-            return i
+    for info in weather_data:
+        if info['date'] == date:
+            return info
+        else:
+            return 'Date invalide'
 
 if __name__ == '__main__':
     import uvicorn
