@@ -14,6 +14,7 @@ async def afficher_date():
     """
     return weather_data
 
+
 @app.get('/date/{id}')
 async def filtre_date(id : int):
     """
@@ -26,6 +27,42 @@ async def filtre_date(id : int):
     weather_data_id = weather_data[id]
     return weather_data_id
 
+
+@app.get('/filter/date/{annee}-{mois}-{jour}')
+async def filtrer_date(annee, mois, jour):
+    """
+    Cette fonction permet d'afficher les données d'une date précise.
+
+    :param annee: L'année de la date à afficher.
+    :param mois: Le mois de la date à afficher.
+    :param jour: Le jour de la date à afficher.
+
+    Les trois arguments doivent être des nombres entiers.
+
+    :return: Les données de la date demandée.
+    """
+
+    date = f'{annee}-{mois}-{jour}'
+    for data in weather_data:
+        if data['date'] == date:
+            return data
+    return 'Date introuvable. Veuillez indiquer une date dans le format : annee-mois-jour.'
+
+@app.get('/date/precipitation/{prcp}')
+async def precipitation_date(prcp: float):
+    """
+    Cette fonction permet d'afficher les precipitations des dates.
+
+    Returns:
+        date.
+    """
+    date = prcp
+    precipitation_tab = []
+    for precipitation in weather_data:
+        if precipitation['prcp'] == date:
+            precipitation_tab.append(precipitation)
+
+    return precipitation_tab
 
 if __name__ == '__main__':
     import uvicorn
