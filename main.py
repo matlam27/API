@@ -7,26 +7,10 @@ app = FastAPI()
 with open('rdu-weather-history.json', 'r') as json_file:
     weather_data = json.load(json_file)
 
-@app.get('/meteo')
-async def obtenir_meteo(date: str = None):
-    if date:
-        try:
-            date = datetime.strptime(date, "%Y-%m-%d")
-        except ValueError:
-            return {"message": "Format de date invalide. Utilisez YYYY-MM-DD."}, 400
-    else:
-        date = datetime.now()
-
-    meteo = None
-    for entry in weather_data:
-        if entry["date"] == date.strftime("%Y-%m-%d"):
-            meteo = entry
-            break
-
-    if meteo is None:
-        return {"message": "Aucune donnée météorologique disponible pour cette date."}, 404
-
-    return meteo
+@app.get('/date')
+async def afficher_date():
+    """Cette fonction permet d'afficher toutes les dates présentes dans le fichier json."""
+    return weather_data
 
 if __name__ == '__main__':
     import uvicorn
