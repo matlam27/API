@@ -103,17 +103,23 @@ if __name__ == '__main__':
     uvicorn.run(app, host="127.0.0.1", port=8000)
 
 
-@app.delete('/date')
-async def supprimer_dates():
-    """supprime les dates du fichier json."""
-    for key in list(weather_data.keys()):
-        if key == "date":
-            del weather_data[key]
-    with open("rdu-weather-history.json", "w") as json_file:
-        json.dump(weather_data, json_file)
+@app.delete('/date/{annee}-{mois}-{jour}')
+async def supprimer_date(annee: int, mois: int, jour: int):
+    """supprime une date du fichier json"""
+    global weather_data
 
-    return {"les dates ont été supprimées"}
+    date_to_delete = f'{annee}-{mois}-{jour}'
 
-if __name__ == "__main__":
+    for i, data in enumerate(weather_data):
+        if data['date'] == date_to_delete:
+            del weather_data[i]
+            with open("rdu-weather-history.json", "w") as json_file:
+                json.dump(weather_data, json_file, indent=4)
+            return {"la date a été supprimée avec succès"}
+
+    raise HTTPException(
+        status_code=404, detail="la date est introuvable")
+
+if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
