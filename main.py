@@ -11,7 +11,7 @@ with open('rdu-weather-history.json', 'r') as json_file:
 async def afficher_date():
     return weather_data
 
-@app.get('/filter/{annee}-{mois}-{jour}')
+@app.get('/filter/date/{annee}-{mois}-{jour}')
 async def filtrer_date(annee, mois, jour):
     """
     Cette fonction permet d'afficher les données d'une date précise.
@@ -25,12 +25,11 @@ async def filtrer_date(annee, mois, jour):
     :return: Les données de la date demandée.
     """
 
-    date = (f'{annee}-{mois}-{jour}')
-    for info in weather_data:
-        if info['date'] == date:
-            return info
-        else:
-            return 'Date invalide. Veuillez indiquer une date dans le format : annee-mois-jour.'
+    date = f'{annee}-{mois}-{jour}'
+    for data in weather_data:
+        if data['date'] == date:
+            return data
+    return 'Date introuvable. Veuillez indiquer une date dans le format : annee-mois-jour.'
 
 if __name__ == '__main__':
     import uvicorn
