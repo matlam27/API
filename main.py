@@ -31,6 +31,15 @@ async def filtrer_date(annee, mois, jour):
             return data
     return 'Date introuvable. Veuillez indiquer une date dans le format : annee-mois-jour.'
 
+@app.get('/filter/temp/{args}')
+async def filtrer_temp(args):
+    args = int(args)
+    dates = []
+    for data in weather_data:
+        if data['tmax'] == args:
+            dates.append(data)
+    return dates
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
