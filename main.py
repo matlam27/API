@@ -38,7 +38,17 @@ async def filtrer_temp(args):
     for data in weather_data:
         if data['tmax'] == args:
             dates.append(data)
-    return dates
+    if len(dates) != 0:
+        return dates
+    return 'Température introuvable. Veuillez indiquer une température en degrés Fahrenheit.'
+
+@app.update('/update/{date}/{args}/{modification}')
+async def update(date, args, modification):
+    for data in weather_data:
+        if data['date'] == date:
+            data[args] = modification
+            return data
+    return 'Date introuvable. Veuillez indiquer une date dans le format : annee-mois-jour.'
 
 if __name__ == '__main__':
     import uvicorn
