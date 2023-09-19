@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from datetime import datetime
 import json
 
 app = FastAPI()
@@ -41,17 +40,6 @@ async def filtrer_temp(args):
     if len(dates) != 0:
         return dates
     return 'Température introuvable. Veuillez indiquer une température en degrés Fahrenheit.'
-
-@app.patch('/update/{annee}-{mois}-{jour}/{args}/{modification}')
-async def update(annee, mois, jour, args, modification):
-    date = f'{annee}-{mois}-{jour}'
-    if args != 'date':
-        modification = int(modification)
-    for data in weather_data:
-        if data['date'] == date:
-            data[args] = modification
-            return data
-    return 'Date introuvable. Veuillez indiquer une date dans le format : annee-mois-jour.'
 
 if __name__ == '__main__':
     import uvicorn
