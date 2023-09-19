@@ -30,7 +30,7 @@ async def filtrer_date(annee, mois, jour):
         if info['date'] == date:
             return info
         else:
-            return 'Date invalide'
+            return 'Date invalide. Veuillez indiquer une date dans le format : annee-mois-jour.'
 
 if __name__ == '__main__':
     import uvicorn
