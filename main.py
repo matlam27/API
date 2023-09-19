@@ -188,7 +188,7 @@ async def precipitation_date(prcp: float):
             "nombre_requetes_prcp_specifique": compteur_prcp[prcp], "precipitation_tab": precipitation_tab}
 
 
-@app.delete('/delete/{annee}-{mois}-{jour}')
+@app.get('/delete/{annee}-{mois}-{jour}')
 async def supprimer_date(annee, mois, jour):
     """
     Supprime une date du fichier JSON.
