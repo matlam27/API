@@ -105,7 +105,21 @@ if __name__ == '__main__':
 
 @app.delete('/date/{annee}-{mois}-{jour}')
 async def supprimer_date(annee, mois, jour):
-    """supprime une date du fichier json"""
+    """
+    Supprime une date du fichier JSON.
+
+    Args:
+        annee (str): L'année de la date à supprimer.
+        mois (str): Le mois de la date à supprimer.
+        jour (str): Le jour de la date à supprimer.
+
+    Returns:
+        dict: Un dictionnaire contenant un message indiquant que la date a été supprimée avec succès.
+
+    Raises:
+        HTTPException: Une exception HTTP 404 est levée si la date n'a pas été trouvée dans les données.
+
+    """
     global weather_data
 
     date_to_delete = f'{annee}-{mois}-{jour}'
