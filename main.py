@@ -42,8 +42,11 @@ async def filtrer_temp(args):
         return dates
     return 'Température introuvable. Veuillez indiquer une température en degrés Fahrenheit.'
 
-@app.update('/update/{date}/{args}/{modification}')
-async def update(date, args, modification):
+@app.patch('/update/{annee}-{mois}-{jour}/{args}/{modification}')
+async def update(annee, mois, jour, args, modification):
+    date = f'{annee}-{mois}-{jour}'
+    if args != 'date':
+        modification = int(modification)
     for data in weather_data:
         if data['date'] == date:
             data[args] = modification
