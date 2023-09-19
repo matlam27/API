@@ -104,7 +104,7 @@ if __name__ == '__main__':
 
 
 @app.delete('/date/{annee}-{mois}-{jour}')
-async def supprimer_date(annee: int, mois: int, jour: int):
+async def supprimer_date(annee, mois, jour):
     """supprime une date du fichier json"""
     global weather_data
 
@@ -114,7 +114,7 @@ async def supprimer_date(annee: int, mois: int, jour: int):
         if data['date'] == date_to_delete:
             del weather_data[i]
             with open("rdu-weather-history.json", "w") as json_file:
-                json.dump(weather_data, json_file, indent=4)
+                json.dump(weather_data, json_file)
             return {"la date a été supprimée avec succès"}
 
     raise HTTPException(
