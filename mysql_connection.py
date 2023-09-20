@@ -17,7 +17,6 @@ def test_database_connection():
             print("connexion à la DB mySQL réussie")
     except mysql.connector.Error as err:
         print(f"erreur de connexion à la DB: {err}")
-    finally:
         if 'connection' in locals():
             connection.close()
 
