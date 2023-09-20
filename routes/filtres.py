@@ -8,9 +8,13 @@ with open('rdu-weather-history.json', 'r') as json_file:
 
 compteur_filtrer_date = 0
 compteur_filtrer_temp = 0
+compteur_filtrer_country = 0
+compteur_filtrer_city = 0
 
 compteur_dates = {}
 compteur_temp = {}
+compteur_country = {}
+compteur_city = {}
 
 @router.get('/date/{annee}-{mois}-{jour}')
 async def filtrer_date(annee, mois, jour):
@@ -65,9 +69,24 @@ async def filtrer_temp(args: int):
     # Incrémente le compteur pour cette température spécifique
     compteur_temp[args] = compteur_temp.get(args, 0) + 1
 
-    dates = []
+    temp = []
     for data in weather_data:
         if data['tmax'] == args:
-            dates.append(data)
+            temp.append(data)
     return {"nombre_requetes_filtrer_temp": compteur_filtrer_temp,
-            "nombre_requetes_date_specifique": compteur_temp[args], "weather_data": dates}
+            "nombre_requetes_date_specifique": compteur_temp[args], "weather_data": temp}
+
+@router.get('/country/{countries}')
+async def filtrer_country(countries: str):
+    global compteur_filtrer_country
+    compteur_filtrer_country += 1
+
+    # Incrémente le compteur pour ce pays spécifique
+    compteur_country[countries] = compteur_country.get(countries, 0) + 1
+
+    countries_data = []
+    for data in weather_data:
+        if data['country'] == countries:
+            countries_data.append(data)
+
+    return countries_data

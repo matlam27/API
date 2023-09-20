@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Path
 from pydantic import BaseModel
 import json
 
@@ -11,6 +11,8 @@ compteur_ajouter_date = 0
 
 class WeatherDate(BaseModel):
     date: str
+    country: str
+    city: str
     tmin: int = 0
     tmax: int = 0
     prcp: float = 0.0
@@ -18,9 +20,11 @@ class WeatherDate(BaseModel):
     snwd: float = 0.0
     awnd: float = 0.0
 
-@router.post('/{date}/{tmin}/{tmax}/{prcp}/{snow}/{snwd}/{awnd}')
+@router.post('/{date}/{country}/{city}/{tmin}/{tmax}/{prcp}/{snow}/{snwd}/{awnd}')
 async def ajouter_date(
     date: str,
+    country: str,
+    city: str,
     tmin: int,
     tmax: int,
     prcp: float,
@@ -53,12 +57,13 @@ async def ajouter_date(
     global compteur_ajouter_date
     compteur_ajouter_date += 1
 
-    for data in weather_data:
-        if data['date'] == date:
-            raise HTTPException(status_code=400, detail="La date existe déjà dans le fichier JSON")
+    if any(data['date'] == date for data in weather_data):
+        raise HTTPException(status_code=400, detail="La date existe déjà dans le fichier JSON")
 
     new_date = WeatherDate(
         date=date,
+        country=country,
+        city=city,
         tmin=tmin,
         tmax=tmax,
         prcp=prcp,
