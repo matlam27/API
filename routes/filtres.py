@@ -36,8 +36,10 @@ async def filtrer_date(annee, mois, jour):
     # Incrémente le compteur pour cette date spécifique
     compteur_dates[date] = compteur_dates.get(date, 0) + 1
 
+    # Recherche la date dans le fichier JSON
     for data in weather_data:
         if data['date'] == date:
+            # Retourne les données de la date demandée
             return {"nombre_requetes_filtrer_date": compteur_filtrer_date,
                     "nombre_requetes_date_specifique": compteur_dates[date], "weather_data": data}
 
@@ -57,7 +59,7 @@ async def filtrer_temp(args: int):
 
     Example:
         Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
-        http://127.0.0.1:8000/filter/temp/82
+        http://127.0.0.1:8000/temp/82
     """
     global compteur_filtrer_temp
     compteur_filtrer_temp += 1
