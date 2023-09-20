@@ -1,9 +1,13 @@
 from fastapi import FastAPI
+
+import database
 from routes import router as routes_router
 
 app = FastAPI()
 
 app.include_router(routes_router)
+
+database.database_connection()
 
 if __name__ == '__main__':
     import uvicorn
