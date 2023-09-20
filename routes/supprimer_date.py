@@ -9,7 +9,7 @@ with open('rdu-weather-history.json', 'r') as json_file:
 compteur_delete = 0
 
 
-@router.get('/{annee}-{mois}-{jour}')
+@router.delete('/{annee}-{mois}-{jour}')
 async def supprimer_date(annee, mois, jour):
     """
     Supprime une date du fichier JSON.

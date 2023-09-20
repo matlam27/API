@@ -18,7 +18,7 @@ class WeatherDate(BaseModel):
     snwd: float = 0.0
     awnd: float = 0.0
 
-@router.get('/{date}/{tmin}/{tmax}/{prcp}/{snow}/{snwd}/{awnd}')
+@router.post('/{date}/{tmin}/{tmax}/{prcp}/{snow}/{snwd}/{awnd}')
 async def ajouter_date(
     date: str,
     tmin: int,
