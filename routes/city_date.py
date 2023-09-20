@@ -8,6 +8,12 @@ router = APIRouter()
 
 @router.get('/{city}')
 async def city_date(city: str):
+    """
+    Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à une ville qu'il rentre dans l'URL.
+    :param city: (str) ville rentrée par l'utilisateur dans l'url
+    :return:
+    Une erreur en cas d'erreur ou la liste des données
+    """
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:

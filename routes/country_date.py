@@ -8,6 +8,12 @@ router = APIRouter()
 
 @router.get('/{country}')
 async def country_date(country: str):
+    """
+        Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à un pays qu'il rentre dans l'URL.
+        :param country: (str) pays rentré par l'utilisateur dans l'url
+        :return:
+        Une erreur en cas d'erreur ou la liste des données correspondant au pays entré par l'utilisateur.
+        """
     try:
         # Connect to the database
         with mysql.connector.connect(**config) as db:
