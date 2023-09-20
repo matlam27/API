@@ -1,4 +1,6 @@
 from fastapi import APIRouter, HTTPException
+from mysql_connection import config
+import mysql.connector
 import json
 
 router = APIRouter()
@@ -13,7 +15,7 @@ compteur_dates = {}
 compteur_temp = {}
 
 @router.get('/date/{annee}-{mois}-{jour}')
-async def filtrer_date(annee, mois, jour):
+async def filtrer_date(annee: int, mois: int, jour: int):
     """
     Cette fonction permet d'afficher les données pour une date spécifique.
 
@@ -28,22 +30,26 @@ async def filtrer_date(annee, mois, jour):
     Raises:
         HTTPException: Si la date n'est pas trouvée dans le fichier JSON, une erreur HTTP 404 est générée.
     """
-    global compteur_filtrer_date
-    compteur_filtrer_date += 1
+    
+    try:
+        with mysql.connector.connect(**config) as db:
+            with db.cursor() as c:
+                # Utilisez une requête SQL avec une clause WHERE pour filtrer par date
+                query = "SELECT * FROM meteo WHERE YEAR(date) = %s AND MONTH(date) = %s AND DAY(date) = %s"
+                c.execute(query, (annee, mois, jour))
+                result = c.fetchall()
 
-    date = (f'{annee}-{mois}-{jour}')
+                if not result:
+                    raise HTTPException(status_code=404, detail="Data not found")
 
-    # Incrémente le compteur pour cette date spécifique
-    compteur_dates[date] = compteur_dates.get(date, 0) + 1
+                # Convert the result to a list of dictionaries
+                data = [dict(zip(c.column_names, row)) for row in result]
 
-    # Recherche la date dans le fichier JSON
-    for data in weather_data:
-        if data['date'] == date:
-            # Retourne les données de la date demandée
-            return {"nombre_requetes_filtrer_date": compteur_filtrer_date,
-                    "nombre_requetes_date_specifique": compteur_dates[date], "weather_data": data}
+                return {"meteo_data": data}
 
-    raise HTTPException(status_code=404, detail="Date introuvable dans le fichier JSON")
+    except mysql.connector.Error as err:
+        # Handle database errors
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
 
 @router.get('/temp/{args}')
 async def filtrer_temp(args: int):
