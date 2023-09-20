@@ -8,7 +8,7 @@ with open('rdu-weather-history.json', 'r') as json_file:
 
 compteur_afficher_donnees = 0
 
-@router.get('/')
+@router.get('/get')
 async def afficher_donnees():
     """
     Cette fonction permet d'afficher toutes les dates présentes dans le fichier JSON.
