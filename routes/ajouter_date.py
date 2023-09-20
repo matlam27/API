@@ -17,8 +17,10 @@ class WeatherDate(BaseModel):
     snow: float = 0.0
     snwd: float = 0.0
     awnd: float = 0.0
+    country: str
+    city: str
 
-@router.post('/{date}/{tmin}/{tmax}/{prcp}/{snow}/{snwd}/{awnd}')
+@router.post('/{date}/{tmin}/{tmax}/{prcp}/{snow}/{snwd}/{awnd}/{country}/{city}')
 async def ajouter_date(
     date: str,
     tmin: int,
@@ -26,7 +28,10 @@ async def ajouter_date(
     prcp: float,
     snow: float,
     snwd: float,
-    awnd: float
+    awnd: float,
+    country: str,
+    city: str
+
 ):
     """
     Cette fonction permet d'ajouter une nouvelle date avec des données météorologiques au fichier JSON.
@@ -39,6 +44,8 @@ async def ajouter_date(
         snow (float): La quantité de neige.
         snwd (float): L'épaisseur de la neige.
         awnd (float): La vitesse du vent moyen.
+        country (str): Le pays correspondant à la date.
+        city (str): La ville correspondant à la date.
 
     Returns:
         dict: Un message indiquant le succès de l'opération et le nombre de requêtes pour ajouter une date.
@@ -64,7 +71,9 @@ async def ajouter_date(
         prcp=prcp,
         snow=snow,
         snwd=snwd,
-        awnd=awnd
+        awnd=awnd,
+        country=country,
+        city=city
     )
 
     weather_data.append(new_date.dict())
