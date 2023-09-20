@@ -2,11 +2,10 @@ import mysql.connector
 
 config = {
     'user': 'root',
-    'password': 'root',
+    'password': '',
     'host': '127.0.0.1',
-    'port': 8889,
+    'port': 3306,
     'database': 'API',
-    'raise_on_warnings': True
 }
 
 
