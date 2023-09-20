@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/ajouter_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_date.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysql_connection.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +59,7 @@
       <workItem from="1695132554192" duration="2857000" />
       <workItem from="1695192267290" duration="3260000" />
       <workItem from="1695200860974" duration="1197000" />
-      <workItem from="1695203271198" duration="1705000" />
+      <workItem from="1695203271198" duration="2565000" />
     </task>
     <servers />
   </component>
