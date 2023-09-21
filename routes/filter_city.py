@@ -5,16 +5,31 @@ from database import config
 
 router = APIRouter()
 
+compteur_par_ville = 0
+compteur_par_ville_specifique = {}
 
 @router.get('/{city}')
 async def city_date(city: str):
     """
-    Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à une ville qu'il rentre dans l'URL.
-    :param city: (str) ville rentrée par l'utilisateur dans l'url
-    :return:
-    Une erreur en cas d'erreur ou la liste des données
+    Récupère les données météorologiques pour une ville spécifique depuis la base de données.
+
+    Args:
+        city (str): Le nom de la ville pour laquelle vous souhaitez récupérer les données météorologiques.
+
+    Returns:
+        dict: Un dictionnaire contenant les informations suivantes :
+            - {"city_data": data, "nombre_requetes_par_ville": compteur_par_ville, "nombre_requetes_par_ville_specifique": compteur_par_ville_specifique} en cas de succès.
+
+    Raises:
+        HTTPException (404): Si aucune donnée n'est trouvée pour la ville spécifiée.
+        HTTPException (500): Si une erreur de base de données se produit.
     """
     try:
+        global compteur_par_ville
+        compteur_par_ville += 1
+
+        compteur_par_ville_specifique[city] = compteur_par_ville_specifique.get(city, 0) + 1
+
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
                 query = "SELECT * FROM meteo WHERE city = %s"
@@ -27,7 +42,8 @@ async def city_date(city: str):
                 # Convert the result to a list of dictionaries
                 data = [dict(zip(c.column_names, row)) for row in result]
 
-                return {"city_data": data}
+                return {"city_data": data,
+                        "nombre_requetes_par_ville": compteur_par_ville, "nombre_requetes_par_ville_specifique": compteur_par_ville_specifique}
 
     except mysql.connector.Error as err:
         # Handle database errors

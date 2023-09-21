@@ -3,7 +3,7 @@ from . import afficher_donnees, ajouter_date, filter_precipitation, supprimer_da
 
 router = APIRouter()
 
-router.include_router(afficher_donnees.router, prefix="/afficher_donnees")
+router.include_router(afficher_donnees.router)
 router.include_router(ajouter_date.router, prefix="/ajouter_date")
 router.include_router(supprimer_date.router, prefix="/delete")
 router.include_router(update.router, prefix="/update")

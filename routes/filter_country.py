@@ -5,16 +5,31 @@ from database import config
 
 router = APIRouter()
 
+compteur_par_pays = 0
+compteur_par_pays_specifique = {}
 
 @router.get('/{country}')
 async def country_date(country: str):
     """
-        Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à un pays qu'il rentre dans l'URL.
-        :param country: (str) pays rentré par l'utilisateur dans l'url
-        :return:
-        Une erreur en cas d'erreur ou la liste des données correspondant au pays entré par l'utilisateur.
-        """
+    Récupère les données météorologiques pour un pays spécifique depuis la base de données.
+
+    Args:
+        country (str): Le nom du pays pour lequel vous souhaitez récupérer les données météorologiques.
+
+    Returns:
+        dict: Un dictionnaire contenant les informations suivantes :
+            - {"country_data": data, "nombre_requetes_par_pays": compteur_par_pays, "nombre_requetes_par_pays_specifique": compteur_par_pays_specifique} en cas de succès.
+
+    Raises:
+        HTTPException (404): Si aucune donnée n'est trouvée pour le pays spécifié.
+        HTTPException (500): Si une erreur de base de données se produit.
+    """
     try:
+        global compteur_par_pays
+        compteur_par_pays += 1
+
+        compteur_par_pays_specifique[country] = compteur_par_pays_specifique.get(country, 0) + 1
+
         # Connect to the database
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
@@ -30,7 +45,8 @@ async def country_date(country: str):
                 # Convert the result to a list of dictionaries
                 data = [dict(zip(c.column_names, row)) for row in result]
 
-                return {"country_data": data}
+                return {"country_data": data,
+                        "nombre_requetes_par_pays": compteur_par_pays, "nombre_requetes_par_pays_specifique": compteur_par_pays_specifique}
 
     except mysql.connector.Error as err:
         # Handle database errors

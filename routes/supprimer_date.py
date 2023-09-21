@@ -1,47 +1,44 @@
+import mysql.connector
 from fastapi import APIRouter, HTTPException
-import json
+from database import config
 
 router = APIRouter()
 
-with open('rdu-weather-history.json', 'r') as json_file:
-    weather_data = json.load(json_file)
+compteur_par_date_supprimer = 0
 
-compteur_delete = 0
-
-
-@router.delete('/{annee}-{mois}-{jour}')
-async def supprimer_date(annee, mois, jour):
+@router.delete('/{date}')
+async def supprimer_date(date: str):
     """
-    Supprime une date du fichier JSON.
+    Supprime les enregistrements de données météorologiques pour une date spécifique de la base de données.
 
     Args:
-        annee (str): L'année de la date à supprimer.
-        mois (str): Le mois de la date à supprimer.
-        jour (str): Le jour de la date à supprimer.
+        date (str): La date au format 'AAAA-MM-JJ' pour laquelle vous souhaitez supprimer les données météorologiques.
 
     Returns:
-        dict: Un dictionnaire contenant un message indiquant que la date a été supprimée avec succès.
+        dict: Un dictionnaire contenant l'un des messages suivants :
+            - {"message": "La date a bien été supprimée"} si la suppression est réussie, "nombre_requetes_par_date_supprimer": compteur_par_date_supprimer.
+            - Réponse HTTP 404 (Non trouvé) si aucune donnée n'est trouvée pour la date spécifiée.
+            - Réponse HTTP 500 (Erreur interne du serveur) si une erreur de base de données se produit.
 
     Raises:
-        HTTPException: Une exception HTTP 404 est levée si la date n'a pas été trouvée dans les données.
-
-    Example:
-        Pour supprimer la date '2023-09-19', vous pouvez accéder à cette URL avec une requête DELETE :
-        http://127.0.0.1:8000/delete/2023-09-19
+        HTTPException: En cas d'erreur de base de données, une réponse HTTP avec un code d'erreur 500 sera renvoyée.
     """
-    global compteur_delete
-    compteur_delete += 1
+    try:
+        global compteur_par_date_supprimer
+        compteur_par_date_supprimer += 1
 
-    global weather_data
+        with mysql.connector.connect(**config) as db:
+            with db.cursor() as c:
+                query = "DELETE FROM meteo WHERE date = %s"
+                c.execute(query, (date,))
+                db.commit()
 
-    date_to_delete =  f'{annee}-{mois}-{jour}'
+                if c.rowcount == 0:
+                    raise HTTPException(
+                        status_code=404, detail="Data not found")
 
-    for i, data in enumerate(weather_data):
-        if data['date'] == date_to_delete:
-            del weather_data[i]
-            with open("rdu-weather-history.json", "w") as json_file:
-                json.dump(weather_data, json_file)
-            return {"message": "Date supprimée avec succès", "compteur_delete": compteur_delete}
+                return {"message": "La date a bien été supprimée",
+                        "nombre_requetes_par_date_supprimer": compteur_par_date_supprimer,}
 
-    raise HTTPException(
-        status_code=404, detail="la date est introuvable")
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")

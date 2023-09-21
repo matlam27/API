@@ -9,4 +9,10 @@ config = {
 }
 
 def get_database_connection():
+  """
+  Établit une connexion à la base de données MySQL en utilisant la configuration spécifiée.
+
+  Returns:
+      mysql.connector.connection.MySQLConnection: Objet de connexion à la base de données.
+  """
   return mysql.connector.connect(**config)

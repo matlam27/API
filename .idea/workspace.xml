@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_2023_18_59__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_2023_18_59__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_2023_18_59__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_09_2023_18_59__Changes_1.xml" afterDir="false" />
+    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="modify ajouter_add to BDD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql_connection.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/afficher_donnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/afficher_donnees.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/ajouter_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_date.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/city_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_city.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/country_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_country.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/filtres.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/precipitation_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_precipitation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/filter_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_city.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/filter_country.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_country.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/filter_precipitation.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_precipitation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/supprimer_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/supprimer_date.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/update.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/update.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +44,18 @@
       <option name="presentableId" value="Default" />
       <updated>1695281343736</updated>
     </task>
+    <task id="LOCAL-00001" summary="modify ajouter_add to BDD">
+      <created>1695284959365</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695284959365</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="modify ajouter_add to BDD" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify ajouter_add to BDD" />
   </component>
 </project>
