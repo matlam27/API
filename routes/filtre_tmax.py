@@ -13,9 +13,8 @@ compteur_filtrer_temp = 0
 compteur_dates = {}
 compteur_temp = {}
 
-
 @router.get('/{args}')
-async def filtre_tmin(args: int):
+async def filtre_tmax(args: int):
     """
     Cette fonction permet de filtrer les dates en fonction de la température minimale.
 
@@ -29,6 +28,7 @@ async def filtre_tmin(args: int):
     Example:
         Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
         http://127.0.0.1:8000/temp/82
+        http://127.0.0.1:8000/temp/82
     """
     global compteur_filtrer_temp
     compteur_filtrer_temp += 1
@@ -40,7 +40,7 @@ async def filtre_tmin(args: int):
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
                 # Utilisez une requête SQL avec une clause WHERE pour filtrer par tmin
-                query = "SELECT * FROM meteo WHERE tmin = %s"
+                query = "SELECT * FROM meteo WHERE tmax = %s"
                 c.execute(query, (args,))
                 result = c.fetchall()
 
