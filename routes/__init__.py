@@ -1,11 +1,11 @@
 from fastapi import APIRouter
-from . import afficher_donnees, ajouter_date, filtres, precipitation_date, supprimer_date, update, country_date, city_date
+from . import afficher_donnees, ajouter_date, filtre_date, precipitation_date, supprimer_date, update, country_date, city_date
 
 router = APIRouter()
 
 router.include_router(afficher_donnees.router, prefix="/afficher_donnees")
 router.include_router(ajouter_date.router, prefix="/ajouter_date")
-router.include_router(filtres.router, prefix="/filter")
+router.include_router(filtre_date.router, prefix="/filter")
 router.include_router(precipitation_date.router, prefix="/prcp")
 router.include_router(supprimer_date.router, prefix="/delete")
 router.include_router(update.router, prefix="/update")
