@@ -5,12 +5,12 @@ from mysql_connection import config
 router = APIRouter()
 
 
-@router.delete('/{date}')
+@router.delete('/{id}')
 async def supprimer_date(date: str):
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "DELETE FROM meteo WHERE date = %s"
+                query = "DELETE FROM meteo WHERE id = %s"
                 c.execute(query, (date,))
                 db.commit()
 
@@ -22,3 +22,4 @@ async def supprimer_date(date: str):
 
     except mysql.connector.Error as err:
         raise HTTPException(status_code=500, detail=f"Database error: {err}")
+# id
