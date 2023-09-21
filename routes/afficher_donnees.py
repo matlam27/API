@@ -2,7 +2,7 @@ import mysql
 from fastapi import APIRouter, HTTPException
 import json
 
-from mysql_connection import config
+from database import config
 
 router = APIRouter()
 

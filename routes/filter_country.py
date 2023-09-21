@@ -1,7 +1,7 @@
 import mysql.connector
 from fastapi import APIRouter, HTTPException, Query
 
-from mysql_connection import config
+from database import config
 
 router = APIRouter()
 
