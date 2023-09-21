@@ -1,6 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from mysql_connection import config
 import mysql.connector
+from mysql_connection import config
+import mysql.connector
 import json
 
 router = APIRouter()
@@ -14,7 +16,9 @@ compteur_filtrer_temp = 0
 compteur_dates = {}
 compteur_temp = {}
 
+
 @router.get('/date/{annee}-{mois}-{jour}')
+async def filtrer_date(annee: int, mois: int, jour: int):
 async def filtrer_date(annee: int, mois: int, jour: int):
     """
     Cette fonction permet d'afficher les données pour une date spécifique.
@@ -107,6 +111,7 @@ async def filtrer_temp(args: int):
 
     Example:
         Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
+        http://127.0.0.1:8000/temp/82
         http://127.0.0.1:8000/temp/82
     """
     global compteur_filtrer_temp
