@@ -6,8 +6,8 @@ router = APIRouter()
 
 compteur_par_date_supprimer = 0
 
-@router.delete('/{date}')
-async def supprimer_date(date: str):
+@router.delete('/{id}')
+async def supprimer_date(id: int):
     """
     Supprime les enregistrements de données météorologiques pour une date spécifique de la base de données.
 
@@ -29,8 +29,8 @@ async def supprimer_date(date: str):
 
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "DELETE FROM meteo WHERE date = %s"
-                c.execute(query, (date,))
+                query = "DELETE FROM meteo WHERE id = %s"
+                c.execute(query, (id,))
                 db.commit()
 
                 if c.rowcount == 0:
