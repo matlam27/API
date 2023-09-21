@@ -6,8 +6,8 @@ from mysql_connection import config
 router = APIRouter()
 
 
-@router.get('/{country}')
-async def country_date(country: str):
+@router.get('/{country}/{id_city}')
+async def country_date(country: str, id_city: int):
     """
         Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à un pays qu'il rentre dans l'URL.
         :param country: (str) pays rentré par l'utilisateur dans l'url
@@ -19,8 +19,8 @@ async def country_date(country: str):
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
                 # Build and execute the SQL query with a parameter
-                query = "SELECT * FROM meteo WHERE name = %s"
-                c.execute(query, (country,))
+                query = "SELECT meteo.*, city.id_country AS city_name, country.name AS country_name FROM meteo JOIN city ON meteo.id_city = city.id JOIN country ON city.id_country = country.id WHERE country.name = %s AND meteo.id_city = %s"
+                c.execute(query, (country, id_city,))
                 result = c.fetchall()
 
                 # Check if any results were found
