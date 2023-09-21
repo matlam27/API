@@ -19,7 +19,7 @@ async def country_date(country: str):
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
                 # Build and execute the SQL query with a parameter
-                query = "SELECT * FROM meteo WHERE country = %s"
+                query = "SELECT * FROM meteo WHERE name = %s"
                 c.execute(query, (country,))
                 result = c.fetchall()
 
