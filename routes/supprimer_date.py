@@ -9,7 +9,7 @@ with open('rdu-weather-history.json', 'r') as json_file:
 compteur_delete = 0
 
 
-@router.get('/{annee}-{mois}-{jour}')
+@router.delete('/{annee}-{mois}-{jour}')
 async def supprimer_date(annee, mois, jour):
     """
     Supprime une date du fichier JSON.
@@ -34,7 +34,7 @@ async def supprimer_date(annee, mois, jour):
 
     global weather_data
 
-    date_to_delete = f'{annee}-{mois}-{jour}'
+    date_to_delete =  f'{annee}-{mois}-{jour}'
 
     for i, data in enumerate(weather_data):
         if data['date'] == date_to_delete:

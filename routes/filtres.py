@@ -1,4 +1,8 @@
 from fastapi import APIRouter, HTTPException
+from mysql_connection import config
+import mysql.connector
+from mysql_connection import config
+import mysql.connector
 import json
 
 router = APIRouter()
@@ -14,7 +18,7 @@ compteur_temp = {}
 
 
 @router.get('/date/{annee}-{mois}-{jour}')
-async def filtrer_date(annee, mois, jour):
+async def filtrer_date(annee: int, mois: int, jour: int):
     """
     Cette fonction permet d'afficher les données pour une date spécifique.
 
@@ -29,27 +33,31 @@ async def filtrer_date(annee, mois, jour):
     Raises:
         HTTPException: Si la date n'est pas trouvée dans le fichier JSON, une erreur HTTP 404 est générée.
     """
-    global compteur_filtrer_date
-    compteur_filtrer_date += 1
+    
+    try:
+        with mysql.connector.connect(**config) as db:
+            with db.cursor() as c:
+                # Utilisez une requête SQL avec une clause WHERE pour filtrer par date
+                query = "SELECT * FROM meteo WHERE YEAR(date) = %s AND MONTH(date) = %s AND DAY(date) = %s"
+                c.execute(query, (annee, mois, jour))
+                result = c.fetchall()
 
-    date = (f'{annee}-{mois}-{jour}')
+                if not result:
+                    raise HTTPException(status_code=404, detail="Data not found")
 
-    # Incrémente le compteur pour cette date spécifique
-    compteur_dates[date] = compteur_dates.get(date, 0) + 1
+                # Convert the result to a list of dictionaries
+                data = [dict(zip(c.column_names, row)) for row in result]
 
-    for data in weather_data:
-        if data['date'] == date:
-            return {"nombre_requetes_filtrer_date": compteur_filtrer_date,
-                    "nombre_requetes_date_specifique": compteur_dates[date], "weather_data": data}
+                return {"meteo_data": data}
 
-    raise HTTPException(
-        status_code=404, detail="Date introuvable dans le fichier JSON")
+    except mysql.connector.Error as err:
+        # Handle database errors
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
 
-
-@router.get('/temp/{args}')
+@router.get('/tmin/{args}')
 async def filtrer_temp(args: int):
     """
-    Cette fonction permet de filtrer les dates en fonction de la température maximale.
+    Cette fonction permet de filtrer les dates en fonction de la température minimale.
 
     Args:
         args (int): La température maximale à utiliser comme critère de filtrage.
@@ -60,7 +68,7 @@ async def filtrer_temp(args: int):
 
     Example:
         Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
-        http://127.0.0.1:8000/filter/temp/82
+        http://127.0.0.1:8000/temp/82
     """
     global compteur_filtrer_temp
     compteur_filtrer_temp += 1
@@ -68,9 +76,65 @@ async def filtrer_temp(args: int):
     # Incrémente le compteur pour cette température spécifique
     compteur_temp[args] = compteur_temp.get(args, 0) + 1
 
-    dates = []
-    for data in weather_data:
-        if data['tmax'] == args:
-            dates.append(data)
-    return {"nombre_requetes_filtrer_temp": compteur_filtrer_temp,
-            "nombre_requetes_date_specifique": compteur_temp[args], "weather_data": dates}
+    try:
+        with mysql.connector.connect(**config) as db:
+            with db.cursor() as c:
+                # Utilisez une requête SQL avec une clause WHERE pour filtrer par tmin
+                query = "SELECT * FROM meteo WHERE tmin = %s"
+                c.execute(query, (args,))
+                result = c.fetchall()
+
+                if not result:
+                    raise HTTPException(status_code=404, detail="Data not found")
+
+                # Convert the result to a list of dictionaries
+                data = [dict(zip(c.column_names, row)) for row in result]
+
+                return {"meteo_data": data}
+
+    except mysql.connector.Error as err:
+        # Handle database errors
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
+
+@router.get('/tmax/{args}')
+async def filtrer_temp(args: int):
+    """
+    Cette fonction permet de filtrer les dates en fonction de la température minimale.
+
+    Args:
+        args (int): La température maximale à utiliser comme critère de filtrage.
+
+    Returns:
+        dict: Une liste des dates qui ont une température maximale égale à l'argument spécifié,
+              ainsi que le nombre total de requêtes pour filtrer des températures et le nombre de requêtes pour cette température spécifique.
+
+    Example:
+        Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
+        http://127.0.0.1:8000/temp/82
+        http://127.0.0.1:8000/temp/82
+    """
+    global compteur_filtrer_temp
+    compteur_filtrer_temp += 1
+
+    # Incrémente le compteur pour cette température spécifique
+    compteur_temp[args] = compteur_temp.get(args, 0) + 1
+
+    try:
+        with mysql.connector.connect(**config) as db:
+            with db.cursor() as c:
+                # Utilisez une requête SQL avec une clause WHERE pour filtrer par tmin
+                query = "SELECT * FROM meteo WHERE tmax = %s"
+                c.execute(query, (args,))
+                result = c.fetchall()
+
+                if not result:
+                    raise HTTPException(status_code=404, detail="Data not found")
+
+                # Convert the result to a list of dictionaries
+                data = [dict(zip(c.column_names, row)) for row in result]
+
+                return {"meteo_data": data}
+
+    except mysql.connector.Error as err:
+        # Handle database errors
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
