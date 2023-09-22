@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from . import afficher_meteo, ajouter_date, filtre_date, filtre_tmax, filtre_tmin, precipitation_date, supprimer_date, update, filter_country, filter_city, ajouter_city, ajouter_country, afficher_country, afficher_city, update_city, update_country
+from . import afficher_meteo, ajouter_date, filtre_date, filtre_tmax, filtre_tmin, precipitation_date, supprimer_date, update, filter_country, filter_city, ajouter_city, ajouter_country, afficher_country, afficher_city, update_city, update_country, supprimer_country, supprimer_city
 
 router = APIRouter()
 
@@ -21,8 +21,10 @@ router.include_router(filter_country.router, prefix="/country")
 
 # DELETE methods
 router.include_router(supprimer_date.router, prefix="/weather")
+router.include_router(supprimer_country.router, prefix="/country")
+router.include_router(supprimer_city.router, prefix="/city")
 
-# PATCH methods
+# PUT methods
 router.include_router(update.router, prefix="/weather")
 router.include_router(update_country.router, prefix="/country")
 router.include_router(update_city.router, prefix="/city")
