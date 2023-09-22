@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/ajouter_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_date.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/filtre_tmax.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filtre_tmax.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/filtre_tmin.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filtre_tmin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/precipitation_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/precipitation_date.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/supprimer_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/supprimer_date.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/afficher_donnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/afficher_meteo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/ajouter_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_city.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
       <updated>1695280846065</updated>
       <workItem from="1695280847899" duration="19000" />
       <workItem from="1695280878248" duration="18745000" />
-      <workItem from="1695365394126" duration="5697000" />
+      <workItem from="1695365394126" duration="8695000" />
     </task>
     <servers />
   </component>

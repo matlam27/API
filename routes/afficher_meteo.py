@@ -8,7 +8,7 @@ router = APIRouter()
 compteur_afficher_donnees = 0
 
 @router.get('/')
-async def afficher_donnees_date():
+async def afficher_meteo_date():
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
