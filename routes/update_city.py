@@ -26,8 +26,8 @@ async def update_country(id: int, data: dict):
     Cette route permet de mettre à jour le nom et l'identifiant d'un pays existant dans la base de données en spécifiant les nouvelles valeurs dans le dictionnaire 'data'.
     """
     try:
-        new_name = data.get("name")
-        new_id_country = data.get("id_country")
+        name = data.get("name")
+        id_country = data.get("id_country")
 
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
@@ -38,12 +38,12 @@ async def update_country(id: int, data: dict):
                     update_fields = []
                     update_values = []
 
-                    if new_name:
+                    if name:
                         update_fields.append("name = %s")
-                        update_values.append(new_name)
-                    if new_id_country:
+                        update_values.append(name)
+                    if id_country:
                         update_fields.append("id_country = %s")
-                        update_values.append(new_id_country)
+                        update_values.append(id_country)
 
                     if update_fields:
                         update_values.append(id)

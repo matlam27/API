@@ -4,10 +4,10 @@ from database import config
 
 router = APIRouter()
 
-compteur_par_id_date_supprimer = 0
+compteur_par_id_city_supprimer = 0
 
 @router.delete('/{id}')
-async def supprimer_date(id: int):
+async def supprimer_city(id: int):
     """
     Supprime les enregistrements de données météorologiques pour une date spécifique de la base de données.
 
@@ -24,12 +24,12 @@ async def supprimer_date(id: int):
         HTTPException: En cas d'erreur de base de données, une réponse HTTP avec un code d'erreur 500 sera renvoyée.
     """
     try:
-        global compteur_par_id_date_supprimer
-        compteur_par_id_date_supprimer += 1
+        global compteur_par_id_city_supprimer
+        compteur_par_id_city_supprimer += 1
 
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "DELETE FROM meteo WHERE id = %s"
+                query = "DELETE FROM city WHERE id = %s"
                 c.execute(query, (id,))
                 db.commit()
 
@@ -37,8 +37,8 @@ async def supprimer_date(id: int):
                     raise HTTPException(
                         status_code=404, detail="Data not found")
 
-                return {"message": "La météo a bien été supprimée",
-                        "nombre_requetes_par_id_supprimer": compteur_par_id_date_supprimer,}
+                return {"message": "La ville a bien été supprimée",
+                        "nombre_requetes_par_id_city_supprimer": compteur_par_id_city_supprimer,}
 
     except mysql.connector.Error as err:
         raise HTTPException(status_code=500, detail=f"Database error: {err}")
