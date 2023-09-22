@@ -4,52 +4,87 @@ import mysql.connector
 
 router = APIRouter()
 
-compteur_update = 0
-compteur_update_specifique = {}
-
-@router.put('/{annee}-{mois}-{jour}/{args}/{modification}')
-async def update(annee: str, mois: str, jour: str, args: str, modification: str):
+@router.put('/{id}')
+async def update(id: int, data: dict):
     """
-    Met à jour les données météorologiques pour une date spécifique dans la base de données.
+    Mettre à jour les données météorologiques d'une entrée existante dans la base de données.
 
-    Args:
-        annee (str): L'année de la date à mettre à jour.
-        mois (str): Le mois de la date à mettre à jour.
-        jour (str): Le jour de la date à mettre à jour.
-        args (str): Le champ des données météorologiques à mettre à jour.
-        modification (str): La nouvelle valeur à attribuer au champ spécifié.
+    Paramètres :
+    - id (int) : L'identifiant de l'entrée à mettre à jour.
+    - data (dict) : Un dictionnaire contenant les données à mettre à jour, y compris :
+      - "date" (str) : La date des données météorologiques.
+      - "tmin" (float) : La température minimale.
+      - "tmax" (float) : La température maximale.
+      - "prcp" (float) : Les précipitations.
+      - "snow" (float) : La neige.
+      - "snwd" (float) : L'accumulation de neige au sol.
+      - "awnd" (float) : La vitesse moyenne du vent.
+      - "id_city" (int) : L'identifiant de la ville associée aux données.
 
-    Returns:
-        dict or str: Un dictionnaire contenant les données mises à jour si la date est trouvée,
-                     ou une chaîne de caractères indiquant que la date est introuvable.
+    Retours :
+    - dict : Un message indiquant si les données ont été mises à jour avec succès ou si aucune donnée n'a été mise à jour.
 
-    Remarques:
-        - Si 'args' n'est pas égal à 'date', 'modification' doit être une chaîne de caractères ou un nombre.
-        - Le format de la date doit être : 'annee-mois-jour'.
+    Exceptions :
+    - HTTPException : En cas d'erreur de base de données, une exception HTTP avec un code d'état 500 est levée, et les détails de l'erreur sont inclus dans le message.
+
+    Remarque :
+    Cette route permet de mettre à jour les données météorologiques d'une entrée existante dans la base de données en spécifiant les champs à mettre à jour dans le dictionnaire 'data'. Si un champ est laissé vide ou à 'None', il ne sera pas mis à jour.
     """
-    global compteur_update
-    compteur_update += 1
-
-    date = f'{annee}-{mois}-{jour}'
-
-    compteur_update_specifique[date] = compteur_update_specifique.get(date, 0) + 1
-
     try:
+        date = data.get("date")
+        tmin = data.get("tmin")
+        tmax = data.get("tmax")
+        prcp = data.get("prcp")
+        snow = data.get("snow")
+        snwd = data.get("snwd")
+        awnd = data.get("awnd")
+        id_city = data.get("id_city")
+
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                if args != 'date':
-                    modification = int(modification)
-                query = f"UPDATE meteo SET {args} = %s WHERE date = %s"
-                c.execute(query, (modification, date))
-                db.commit()
+                c.execute("SELECT * FROM meteo WHERE id = %s", (id,))
+                existing_data = c.fetchone()
 
-                if c.rowcount > 0:
-                    return {"message": "Données mises à jour avec succès",
-                            "compteur_update": compteur_update,
-                            "compteur_update_specifique": compteur_update_specifique[date]}
+                if existing_data:
+                    update_fields = []
+                    update_values = []
+
+                    if date:
+                        update_fields.append("date = %s")
+                        update_values.append(date)
+                    if tmin is not None:
+                        update_fields.append("tmin = %s")
+                        update_values.append(tmin)
+                    if tmax is not None:
+                        update_fields.append("tmax = %s")
+                        update_values.append(tmax)
+                    if prcp is not None:
+                        update_fields.append("prcp = %s")
+                        update_values.append(prcp)
+                    if snow is not None:
+                        update_fields.append("snow = %s")
+                        update_values.append(snow)
+                    if snwd is not None:
+                        update_fields.append("snwd = %s")
+                        update_values.append(snwd)
+                    if awnd is not None:
+                        update_fields.append("awnd = %s")
+                        update_values.append(awnd)
+                    if id_city is not None:
+                        update_fields.append("id_city = %s")
+                        update_values.append(id_city)
+
+                    if update_fields:
+                        query = f"UPDATE meteo SET {', '.join(update_fields)} WHERE id = %s"
+                        update_values.append(id)
+                        c.execute(query, tuple(update_values))
+                        db.commit()
+                        return {"message": "Données mises à jour avec succès"}
+                    else:
+                        return {"message": "Aucune donnée à mettre à jour"}
+
                 else:
-                    return 'Date introuvable. Veuillez indiquer une date au format : annee-mois-jour.'
+                    return 'ID introuvable dans la base de données.'
 
     except mysql.connector.Error as err:
-        # Gérer les erreurs de base de données
         raise HTTPException(status_code=500, detail=f"Erreur de base de données : {err}")

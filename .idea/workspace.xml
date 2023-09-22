@@ -4,15 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="upgrade full docstring">
+    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="ajouter date ubdate and delete passe par id">
+      <change afterPath="$PROJECT_DIR$/routes/ajouter_city.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/ajouter_country.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/filtre_date.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/filtre_tmax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/filtre_tmin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/ajouter_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_date.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/supprimer_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/supprimer_date.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/filter_precipitation.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_precipitation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/update.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/update.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -22,13 +36,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -52,12 +66,20 @@
       <option name="project" value="LOCAL" />
       <updated>1695291548737</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ajouter date ubdate and delete passe par id">
+      <created>1695303717088</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1695303717088</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="modify ajouter_add to BDD" />
     <MESSAGE value="upgrade full docstring" />
-    <option name="LAST_COMMIT_MESSAGE" value="upgrade full docstring" />
+    <MESSAGE value="ajouter date ubdate and delete passe par id" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajouter date ubdate and delete passe par id" />
   </component>
 </project>

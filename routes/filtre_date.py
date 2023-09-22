@@ -54,13 +54,11 @@ async def ajouter_date(date : str, weather_data: WeatherData):
             with db.cursor() as c:
                 query = "INSERT INTO meteo (date, tmin, tmax, prcp, snow, snwd, awnd, id_city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
                 c.execute(query, (date, tmin, tmax, prcp, snow, snwd, awnd, id_city))
-                db.commit()
+                result = c.fetchall()
 
                 return {"ajouter_date": 'Sauvegarde effectué',
                         "nombre_requetes_par_date": compteur_par_date, "nombre_requetes_par_date_specifique": compteur_par_date_specifique}
 
-
     except mysql.connector.Error as err:
-        db.rollback()
+        # Handle database errors
         raise HTTPException(status_code=500, detail=f"Database error: {err}")
-
