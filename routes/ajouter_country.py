@@ -25,9 +25,15 @@ async def ajouter_country(country: str):
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "INSERT INTO country (name) VALUES (%s)"
-                c.execute(query, (country,))
-                db.commit()
+                c.execute("SELECT * FROM country WHERE name = %s", (country,))
+                existing_country = c.fetchone()
+
+                if existing_country:
+                    return {"ajouter_country": "Pays déjà existant"}
+                else:
+                    query = "INSERT INTO country (name) VALUES (%s)"
+                    c.execute(query, (country,))
+                    db.commit()
 
         return {"ajouter_country": 'Ajout effectué'}
 

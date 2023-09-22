@@ -28,9 +28,15 @@ async def ajouter_city(city: str, id_country: int):
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "INSERT INTO city (name, id_country) VALUES (%s, %s)"
-                c.execute(query, (city,id_country,))
-                db.commit()
+                c.execute("SELECT * FROM city WHERE name = %s", (city,))
+                existing_city = c.fetchone()
+
+                if existing_city:
+                    return {"ajouter_country": "Ville déjà existante"}
+                else:
+                    query = "INSERT INTO city (name, id_country) VALUES (%s, %s)"
+                    c.execute(query, (city,id_country,))
+                    db.commit()
 
         return {"ajouter_city": 'Ajout effectué'}
 
