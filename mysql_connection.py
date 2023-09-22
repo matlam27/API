@@ -23,9 +23,3 @@ def test_database_connection():
 
 
 test_database_connection()
-
-with mysql.connector.connect(**config) as db :
-    with db.cursor() as c:
-        c.execute("insert into meteo (date, tmin, tmax, prcp, snow, snwd, awnd, id_city) \
-                   values ('2023-09-20', 41, 50, 1, 0.0, 0.0, 6.49, 1)")
-        db.commit()
