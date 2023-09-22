@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="réglage ajouter_date fonctionnel &amp; ubdate fonctionnel">
+    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="add verify bdd to ajouter_city and ajouter_country">
+      <change afterPath="$PROJECT_DIR$/routes/update_city.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/update_country.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/ajouter_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_city.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/ajouter_country.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ajouter_country.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/afficher_donnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/afficher_meteo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/filtre_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filtre_date.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/update.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/update_meteo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

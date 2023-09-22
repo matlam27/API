@@ -5,7 +5,7 @@ import mysql.connector
 router = APIRouter()
 
 @router.put('/{id}')
-async def update(id: int, data: dict):
+async def update_meteo(id: int, data: dict):
     """
     Mettre à jour les données météorologiques d'une entrée existante dans la base de données.
 

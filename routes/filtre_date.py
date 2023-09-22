@@ -19,7 +19,7 @@ class WeatherData(BaseModel):
     awnd: float
     id_city: int
 
-@router.post('/{date}')
+@router.get('/{date}')
 async def ajouter_date(date : str, weather_data: WeatherData):
     """
     Ajoute des données météorologiques pour une date spécifique à la base de données.
