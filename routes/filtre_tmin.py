@@ -20,7 +20,7 @@ async def filtre_tmin(args: int):
     Cette fonction permet de filtrer les dates en fonction de la température minimale.
 
     Args:
-        args (int): La température maximale à utiliser comme critère de filtrage.
+        args (int): La température minimale à utiliser comme critère de filtrage.
 
     Returns:
         dict: Une liste des dates qui ont une température maximale égale à l'argument spécifié,

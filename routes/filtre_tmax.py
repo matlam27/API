@@ -28,7 +28,6 @@ async def filtre_tmax(args: int):
     Example:
         Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
         http://127.0.0.1:8000/temp/82
-        http://127.0.0.1:8000/temp/82
     """
     global compteur_filtrer_temp
     compteur_filtrer_temp += 1
