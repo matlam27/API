@@ -28,7 +28,6 @@ async def filtre_tmax(args: int):
     Example:
         Pour filtrer les dates avec une température maximale de 82, vous pouvez accéder à cette URL avec une requête GET :
         http://127.0.0.1:8000/temp/82
-        http://127.0.0.1:8000/temp/82
     """
     global compteur_filtrer_temp
     compteur_filtrer_temp += 1
@@ -47,11 +46,11 @@ async def filtre_tmax(args: int):
                 if not result:
                     raise HTTPException(status_code=404, detail="Data not found")
 
-                # Convert the result to a list of dictionaries
+                # Convertir le résultat en une liste de dictionnaires
                 data = [dict(zip(c.column_names, row)) for row in result]
 
                 return {"meteo_data": data}
 
     except mysql.connector.Error as err:
-        # Handle database errors
+        # Gérer les erreurs de base de données
         raise HTTPException(status_code=500, detail=f"Database error: {err}")

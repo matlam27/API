@@ -23,11 +23,11 @@ async def afficher_donnees_date():
                 if not result:
                     raise HTTPException(status_code=404, detail="Data not found")
 
-                # Convert the result to a list of dictionaries
+                # Convertir le résultat en une liste de dictionnaires
                 data = [dict(zip(c.column_names, row)) for row in result]
 
                 return {"meteo_data": data}
 
     except mysql.connector.Error as err:
-        # Handle database errors
+        # Gérer les erreurs de base de données
         raise HTTPException(status_code=500, detail=f"Database error: {err}")

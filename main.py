@@ -7,6 +7,12 @@ app = FastAPI()
 app.include_router(routes_router)
 
 def get_db_conn():
+    """
+    Établit une connexion à la base de données et la fournit en tant que générateur.
+
+    Yields:
+        mysql.connector.connection.MySQLConnection: Objet de connexion à la base de données.
+    """
     conn = get_database_connection()
     try:
         yield conn

@@ -60,5 +60,5 @@ async def ajouter_date(date : str, weather_data: WeatherData):
                         "nombre_requetes_par_date": compteur_par_date, "nombre_requetes_par_date_specifique": compteur_par_date_specifique}
 
     except mysql.connector.Error as err:
-        # Handle database errors
+        # Gérer les erreurs de base de données
         raise HTTPException(status_code=500, detail=f"Database error: {err}")

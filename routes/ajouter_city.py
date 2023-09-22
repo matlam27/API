@@ -35,5 +35,5 @@ async def ajouter_city(city: str, id_country: int):
         return {"ajouter_city": 'Ajout effectué'}
 
     except mysql.connector.Error as err:
-        # Handle database errors
+        # Gérer les erreurs de base de données
         raise HTTPException(status_code=500, detail=f"Database error: {err}")

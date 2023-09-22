@@ -4,14 +4,22 @@ from . import afficher_donnees, ajouter_date, filtre_date, filtre_tmax, filtre_t
 router = APIRouter()
 
 router.include_router(afficher_donnees.router)
-router.include_router(ajouter_date.router, prefix="/add-date")
-router.include_router(filtre_date.router, prefix="/search-by-date")
-router.include_router(filtre_tmax.router, prefix="/search-by-tmax")
-router.include_router(filtre_tmin.router, prefix="/search-by-tmin")
-router.include_router(precipitation_date.router, prefix="/search-by-prcp")
-router.include_router(supprimer_date.router, prefix="/remove-date")
-router.include_router(update.router, prefix="/update-date")
-router.include_router(filter_country.router, prefix="/search-by-country")
-router.include_router(filter_city.router, prefix="/search-by-city")
-router.include_router(ajouter_city.router, prefix="/add_city")
-router.include_router(ajouter_country.router, prefix="/add_country")
+
+# POST methods
+router.include_router(ajouter_date.router, prefix="/weather")
+router.include_router(ajouter_city.router, prefix="/city")
+router.include_router(ajouter_country.router, prefix="/country")
+
+# GET methods
+router.include_router(filtre_date.router, prefix="/weather")
+router.include_router(filtre_tmax.router, prefix="/tmax")
+router.include_router(filtre_tmin.router, prefix="/tmin")
+router.include_router(precipitation_date.router, prefix="/prcp")
+router.include_router(filter_city.router, prefix="/city")
+router.include_router(filter_country.router, prefix="/country")
+
+# DELETE methods
+router.include_router(supprimer_date.router, prefix="/weather")
+
+# PATCH methods
+router.include_router(update.router, prefix="/weather")
