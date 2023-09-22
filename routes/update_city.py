@@ -31,7 +31,7 @@ async def update_country(id: int, data: dict):
 
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                c.execute("SELECT * FROM country WHERE id = %s", (id,))
+                c.execute("SELECT * FROM city WHERE id = %s", (id,))
                 existing_country = c.fetchone()
 
                 if existing_country:
@@ -47,7 +47,7 @@ async def update_country(id: int, data: dict):
 
                     if update_fields:
                         update_values.append(id)
-                        query = f"UPDATE country SET {', '.join(update_fields)} WHERE id = %s"
+                        query = f"UPDATE city SET {', '.join(update_fields)} WHERE id = %s"
                         c.execute(query, tuple(update_values))
                         db.commit()
                         return {"message": "Nom et identifiant du pays mis à jour avec succès"}
