@@ -19,7 +19,7 @@ compteur_dates = {}
 compteur_temp = {}
 
 
-@router.get('/date/{annee}-{mois}-{jour}')
+@router.get('/{annee}-{mois}-{jour}')
 async def filtrer_date(annee: int, mois: int, jour: int):
     """
     Cette fonction permet d'afficher les données pour une date spécifique.
