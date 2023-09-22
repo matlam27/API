@@ -4,8 +4,9 @@ config = {
     'user': 'root',
     'password': '',
     'host': '127.0.0.1',
-    'port': 3306,
-    'database': 'API',
+    'port': 8889,
+    'database': 'API2',
+    'raise_on_warnings': True
 }
 
 
@@ -25,6 +26,6 @@ test_database_connection()
 
 with mysql.connector.connect(**config) as db :
     with db.cursor() as c:
-        c.execute("insert into meteo (date, tmin, tmax, prcp, snow, swnd, awnd, country, city) \
-                   values ('2023-09-20', 41, 50, 0.54, 0.0, 0.0, 6.49, 'FRANCE', 'Cergy')")
+        c.execute("insert into meteo (date, tmin, tmax, prcp, snow, snwd, awnd, id_city) \
+                   values ('2023-09-20', 41, 50, 1, 0.0, 0.0, 6.49, 1)")
         db.commit()

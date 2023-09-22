@@ -3,6 +3,8 @@ from mysql_connection import config
 import mysql.connector
 from mysql_connection import config
 import mysql.connector
+from mysql_connection import config
+import mysql.connector
 import json
 
 router = APIRouter()
