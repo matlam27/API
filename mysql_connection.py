@@ -30,6 +30,6 @@ test_database_connection()
 
 with mysql.connector.connect(**config) as db:
     with db.cursor() as c:
-        c.execute("INSERT INTO meteo (date, tmin, tmax, prcp, snow, snwd, awnd, id_city) \
-                   VALUES ('2023-09-20', 41, 50, 1, 0.0, 0.0, 6.49, 1)")
+        c.execute("INSERT INTO meteo (date, tmin, tmax, prcp, snow, snwd, awnd, id_city, id_country) \
+                   VALUES ('2023-09-20', 41, 50, 1, 0.0, 0.0, 6.49, 1, 1)")
         db.commit()
