@@ -12,7 +12,7 @@ compteur_delete = 0
 @router.delete('/{annee}-{mois}-{jour}')
 async def supprimer_date(annee, mois, jour):
     """
-    Supprime une date du fichier JSON.
+    Supprime une date de la BDD.
 
     Args:
         annee (str): L'année de la date à supprimer.

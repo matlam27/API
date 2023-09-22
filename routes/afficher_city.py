@@ -8,22 +8,22 @@ router = APIRouter()
 compteur_afficher_donnees = 0
 
 @router.get('/')
-async def afficher_donnees_date():
+async def afficher_city():
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "SELECT * FROM meteo"
+                query = "SELECT * FROM city"
                 c.execute(query)
                 result = c.fetchall()
 
                 if not result:
                     raise HTTPException(status_code=404, detail="Data not found")
 
-                # Convertir le résultat en une liste de dictionnaires
+                # Convert the result to a list of dictionaries
                 data = [dict(zip(c.column_names, row)) for row in result]
 
                 return {"meteo_data": data}
 
     except mysql.connector.Error as err:
-        # Gérer les erreurs de base de données
+        # Handle database errors
         raise HTTPException(status_code=500, detail=f"Database error: {err}")

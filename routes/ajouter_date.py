@@ -56,7 +56,7 @@ async def ajouter_date(date : str, weather_data: WeatherData):
                 c.execute(query, (date, tmin, tmax, prcp, snow, snwd, awnd, id_city))
                 result = c.fetchall()
 
-                return {"ajouter_date": 'Sauvegarde effectué',
+                return {"ajouter_date": 'Sauvegarde effectuée',
                         "nombre_requetes_par_date": compteur_par_date, "nombre_requetes_par_date_specifique": compteur_par_date_specifique}
 
     except mysql.connector.Error as err:

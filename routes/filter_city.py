@@ -4,7 +4,7 @@ from mysql_connection import config
 
 router = APIRouter()
 
-@router.get('/{city}/{id_city}')
+@router.get('/{id_city}')
 async def city_date(id_city: int):
     """
     Récupère les données de météo pour une ville spécifiée par son identifiant.
