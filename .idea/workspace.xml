@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="add update_city and update_country.py">
-      <change afterPath="$PROJECT_DIR$/routes/supprimer_city.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/supprimer_country.py" afterDir="false" />
+    <list default="true" id="3f2c3471-9347-40b2-8d4e-3a7229503297" name="Changes" comment="update_city correct">
+      <change afterPath="$PROJECT_DIR$/routes/afficher_city.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/afficher_country.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/supprimer_date.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/supprimer_date.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/update_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/update_city.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/afficher_meteo.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/afficher_meteo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/filter_precipitation.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/filter_precipitation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +83,21 @@
       <option name="project" value="LOCAL" />
       <updated>1695376395937</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add deleteècity (a régler) and delete_country">
+      <created>1695378446483</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1695378446483</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update_city correct">
+      <created>1695378602604</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1695378602604</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -92,6 +106,8 @@
     <MESSAGE value="ajouter date ubdate and delete passe par id" />
     <MESSAGE value="réglage ajouter_date fonctionnel &amp; ubdate fonctionnel" />
     <MESSAGE value="add update_city and update_country.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="add update_city and update_country.py" />
+    <MESSAGE value="add deleteècity (a régler) and delete_country" />
+    <MESSAGE value="update_city correct" />
+    <option name="LAST_COMMIT_MESSAGE" value="update_city correct" />
   </component>
 </project>

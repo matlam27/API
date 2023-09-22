@@ -6,9 +6,6 @@ from database import config
 
 router = APIRouter()
 
-with open('rdu-weather-history.json', 'r') as json_file:
-    weather_data = json.load(json_file)
-
 compteur_afficher_donnees = 0
 
 @router.get('/')
