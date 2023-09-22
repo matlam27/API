@@ -6,7 +6,7 @@ from mysql_connection import config
 router = APIRouter()
 
 
-@router.get('/{country}/{id_country}')
+@router.get('/{id_country}')
 async def country_date(id_country: int):
     """
         Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à un pays qu'il rentre dans l'URL.

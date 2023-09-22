@@ -6,7 +6,7 @@ from mysql_connection import config
 router = APIRouter()
 
 
-@router.get('/{city}/{id_city}')
+@router.get('/{id_city}')
 async def city_date(id_city: int):
     """
     Cette fonction permet de retourner à l'utilisateur la liste des météos correspondant à une ville qu'il rentre dans l'URL.

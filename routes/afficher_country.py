@@ -8,11 +8,11 @@ router = APIRouter()
 compteur_afficher_donnees = 0
 
 @router.get('/')
-async def afficher_donnees_date():
+async def afficher_country():
     try:
         with mysql.connector.connect(**config) as db:
             with db.cursor() as c:
-                query = "SELECT * FROM meteo"
+                query = "SELECT * FROM country"
                 c.execute(query)
                 result = c.fetchall()
 
